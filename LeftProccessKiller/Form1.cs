@@ -76,6 +76,7 @@ namespace LeftProccessKiller
 
         private void createItems()
         {
+            listview_process.Clear();
             string proccesses = System.IO.File.ReadAllText(fileName);
             processesForKill = proccesses.Split(';');
             for (int i = 0; i < processesForKill.Length; i++)
@@ -107,6 +108,7 @@ namespace LeftProccessKiller
         private void kill_button_Click(object sender, EventArgs e)
         {
             killSelectedProccesses(listview_process.SelectedItems);
+            createItems();
         }
 
         private void killSelectedProccesses(ListView.SelectedListViewItemCollection Selected)
@@ -159,7 +161,6 @@ namespace LeftProccessKiller
                 }
             }
             else { noActiveProccess(); }
-            createItems();
         }
 
         private void noActiveProccess()
