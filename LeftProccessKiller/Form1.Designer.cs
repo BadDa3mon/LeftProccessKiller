@@ -43,6 +43,9 @@ namespace LeftProccessKiller
             // 
             // kill_button
             // 
+            this.kill_button.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.kill_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.kill_button.Location = new System.Drawing.Point(375, 117);
             this.kill_button.Name = "kill_button";
@@ -54,6 +57,9 @@ namespace LeftProccessKiller
             // 
             // process_title
             // 
+            this.process_title.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.process_title.AutoSize = true;
             this.process_title.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.process_title.Location = new System.Drawing.Point(12, 9);
@@ -64,6 +70,9 @@ namespace LeftProccessKiller
             // 
             // listview_process
             // 
+            this.listview_process.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listview_process.HideSelection = false;
             this.listview_process.Location = new System.Drawing.Point(17, 42);
             this.listview_process.Name = "listview_process";
@@ -73,6 +82,9 @@ namespace LeftProccessKiller
             // 
             // checkBox1
             // 
+            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(17, 220);
             this.checkBox1.Name = "checkBox1";
@@ -84,6 +96,9 @@ namespace LeftProccessKiller
             // 
             // select_file_button
             // 
+            this.select_file_button.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.select_file_button.BackColor = System.Drawing.Color.Transparent;
             this.select_file_button.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.select_file_button.FlatAppearance.BorderSize = 0;
@@ -101,6 +116,9 @@ namespace LeftProccessKiller
             // 
             // killall_button
             // 
+            this.killall_button.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.killall_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.killall_button.Location = new System.Drawing.Point(375, 159);
             this.killall_button.Name = "killall_button";
@@ -112,6 +130,9 @@ namespace LeftProccessKiller
             // 
             // processes_path_label
             // 
+            this.processes_path_label.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.processes_path_label.AutoSize = true;
             this.processes_path_label.Location = new System.Drawing.Point(14, 198);
             this.processes_path_label.Name = "processes_path_label";
@@ -121,6 +142,9 @@ namespace LeftProccessKiller
             // 
             // k_proccesses
             // 
+            this.k_proccesses.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.k_proccesses.AutoSize = true;
             this.k_proccesses.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.k_proccesses.Location = new System.Drawing.Point(145, 9);
@@ -131,6 +155,9 @@ namespace LeftProccessKiller
             // 
             // update_process_button
             // 
+            this.update_process_button.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.update_process_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.update_process_button.Location = new System.Drawing.Point(375, 75);
             this.update_process_button.Name = "update_process_button";

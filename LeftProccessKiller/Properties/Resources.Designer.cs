@@ -63,6 +63,16 @@ namespace LeftProccessKiller.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap settings_icon {
+            get {
+                object obj = ResourceManager.GetObject("settings_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap update_icon {
             get {
                 object obj = ResourceManager.GetObject("update_icon", resourceCulture);

@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="process_icon_icon.ico" />
+    <None Include="Resources\settings_icon.png" />
     <None Include="Resources\update_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
