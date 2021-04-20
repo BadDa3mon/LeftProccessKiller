@@ -38,6 +38,7 @@ namespace LeftProccessKiller
             this.killall_button = new System.Windows.Forms.Button();
             this.processes_path_label = new System.Windows.Forms.Label();
             this.k_proccesses = new System.Windows.Forms.Label();
+            this.update_process_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // kill_button
@@ -128,11 +129,23 @@ namespace LeftProccessKiller
             this.k_proccesses.TabIndex = 8;
             this.k_proccesses.Text = "0";
             // 
+            // update_process_button
+            // 
+            this.update_process_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.update_process_button.Location = new System.Drawing.Point(375, 75);
+            this.update_process_button.Name = "update_process_button";
+            this.update_process_button.Size = new System.Drawing.Size(125, 36);
+            this.update_process_button.TabIndex = 9;
+            this.update_process_button.Text = "Обновить";
+            this.update_process_button.UseVisualStyleBackColor = true;
+            this.update_process_button.Click += new System.EventHandler(this.update_process_button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(517, 255);
+            this.Controls.Add(this.update_process_button);
             this.Controls.Add(this.k_proccesses);
             this.Controls.Add(this.processes_path_label);
             this.Controls.Add(this.killall_button);
@@ -160,6 +173,7 @@ namespace LeftProccessKiller
         private System.Windows.Forms.Button killall_button;
         private System.Windows.Forms.Label processes_path_label;
         private System.Windows.Forms.Label k_proccesses;
+        private System.Windows.Forms.Button update_process_button;
     }
 }
 
