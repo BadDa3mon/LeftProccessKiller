@@ -11,19 +11,20 @@ namespace LeftProccessKiller
         public OpenFileDialog OFD;
         public SaveFileDialog SFD;
         public string fileName, configName;
-        public bool ofConfig, showError, showAddInfo, fromFile;
+        public bool ofConfig, showError, showAddInfo, fromFile, killAllChecked;
+        public int killAllCheckedTime;
         public string[] processesForKill;
         public Form1()
         {
             InitializeComponent();
-            openConfigurationIfNeeded();
+            OpenConfigurationIfNeeded();
             OFD = new OpenFileDialog();
             SFD = new SaveFileDialog();
             OFD.Filter = "Текстовые документы(*.txt)|*.txt|Все файлы(*.*)|*.*";
             SFD.Filter = "Текстовые документы(*.txt)|*.txt|Все файлы(*.*)|*.*";
         }
 
-        public void openConfigurationIfNeeded()
+        public void OpenConfigurationIfNeeded()
         {
             configName = "da3mon_conf.cfg";
             ofConfig = System.IO.File.Exists(configName);
@@ -34,7 +35,7 @@ namespace LeftProccessKiller
             }
             else 
             {
-                getConfig();
+                GetConfig();
                 ofConfig = true;
                 if (fromFile)
                 {
@@ -45,11 +46,11 @@ namespace LeftProccessKiller
                 {
                     checkBox1.Checked = false;
                 }
-                createItems();
+                CreateItems();
             }
         }
 
-        private void getConfig()
+        private void GetConfig()
         {
             string[] lines = System.IO.File.ReadAllLines(configName); int i = 1;
             int firstQuote = lines[i].IndexOf('"') + 1, length = lines[i].Length - firstQuote - 2;
@@ -59,17 +60,30 @@ namespace LeftProccessKiller
             firstQuote = lines[i].IndexOf('"') + 1; length = lines[i].Length - firstQuote - 2;
             showError = bool.Parse(lines[i].Substring(firstQuote, length)); i++;
             firstQuote = lines[i].IndexOf('"') + 1; length = lines[i].Length - firstQuote - 2;
-            showAddInfo = bool.Parse(lines[i].Substring(firstQuote, length));
+            showAddInfo = bool.Parse(lines[i].Substring(firstQuote, length)); i++;
+            firstQuote = lines[i].IndexOf('"') + 1; length = lines[i].Length - firstQuote - 2;
+            killAllChecked = bool.Parse(lines[i].Substring(firstQuote, length)); i++;
+            firstQuote = lines[i].IndexOf('"') + 1; length = lines[i].Length - firstQuote - 2;
+            killAllCheckedTime = int.Parse(lines[i].Substring(firstQuote, length));
         }
 
-        private void resetConfig()
+        public void UpdateSettings()
+        {
+            Form2 sett = new Form2();
+            killAllChecked = sett.killAllCheckbox;
+            killAllCheckedTime = sett.killAllCheckboxTime;
+        }
+
+        private void ResetConfig()
         {
             string first = "#BadDa3mon CONF for ProcessKiller\n";
             string second = "fromFile=" + "\u0022" + $"{fromFile.ToString()}" + "\u0022;\n";
             string third = "filePath=" + "\u0022" + $"{fileName}" + "\u0022;\n";
             string fourth = "showError=" + "\u0022" + $"{showError.ToString()}" + "\u0022;\n";
-            string fifth = "showAddInfo=" + "\u0022" + $"{showAddInfo.ToString()}" + "\u0022;";
-            string all = first + second + third + fourth + fifth;
+            string fifth = "showAddInfo=" + "\u0022" + $"{showAddInfo.ToString()}" + "\u0022;\n";
+            string sixth = "killAllChecked=" + "\u0022" + $"{killAllChecked.ToString()}" + "\u0022;\n";
+            string seventh = "killAllCheckedTime=" + "\u0022" + $"{killAllCheckedTime}" + "\u0022;\n";
+            string all = first + second + third + fourth + fifth + sixth + seventh;
             System.IO.File.WriteAllText(configName, all);
         }
 
@@ -87,17 +101,17 @@ namespace LeftProccessKiller
                 update_process_button.Visible = true;
                 fromFile = false;
             }
-            updateElements();
+            UpdateElements();
         }
 
         private void select_file_button_Click(object sender, EventArgs e)
         {
             if (OFD.ShowDialog() == DialogResult.Cancel) { return; }
             if (fileName.Length == 0) { fileName = OFD.FileName; }
-            updateElements();
+            UpdateElements();
         }
 
-        private void createItems()
+        private void CreateItems()
         {
             listview_process.Clear();
             if (fromFile)
@@ -116,7 +130,7 @@ namespace LeftProccessKiller
                             listview_process.Items.Add(item);
                         }
                     }
-                    catch (IndexOutOfRangeException IndexEx)
+                    catch (IndexOutOfRangeException)
                     {
                         if (showError) { MessageBox.Show($"Error! Proccess with name {processesForKill[i]} not exist!", "Error!", MessageBoxButtons.OK); }
                     }
@@ -138,17 +152,17 @@ namespace LeftProccessKiller
             k_proccesses.Text = listview_process.Items.Count.ToString();
         }
 
-        private void updateElements()
+        private void UpdateElements()
         {
             if (fromFile) { processes_path_label.Text = $"Файл: {fileName}"; }
             else { processes_path_label.Text = $"Файл не выбран"; }
-            createItems();
+            CreateItems();
         }
 
         private void kill_button_Click(object sender, EventArgs e)
         {
             killSelectedProccesses(listview_process.SelectedItems);
-            updateElements();
+            UpdateElements();
         }
 
         private void killSelectedProccesses(ListView.SelectedListViewItemCollection Selected)
@@ -161,33 +175,41 @@ namespace LeftProccessKiller
                     { 
                         Process proc = Process.GetProcessesByName(Selected[0].Text)[0];
                         try { proc.Kill(); }
-                        catch (Win32Exception e) { MessageBox.Show($"Error! You don't have permission to kill {Selected[i].Text}!", "Error!", MessageBoxButtons.OK); }
+                        catch (Win32Exception) { if (showError) { MessageBox.Show($"Error! You don't have permission to kill {Selected[i].Text}!", "Error!", MessageBoxButtons.OK); } }
                     }
-                    catch (IndexOutOfRangeException e) { MessageBox.Show($"Error! Process with name {Selected[i].Text} not exist!", "Error!", MessageBoxButtons.OK); }
+                    catch (IndexOutOfRangeException) { MessageBox.Show($"Error! Process with name {Selected[i].Text} not exist!", "Error!", MessageBoxButtons.OK); }
                     listview_process.Items.RemoveByKey(Selected[i].Text);
                     listview_process.Update();
                 }
             }
-            else { noActiveProccess(); }
+            else { NoActiveProccess(); }
         }
 
         private void killall_button_Click(object sender, EventArgs e)
         {
-            killAllProccesses(listview_process.Items);
-            updateElements();
+            KillAllProccesses(listview_process.Items);
+            UpdateElements();
+        }
+
+        private void settings_button_Click(object sender, EventArgs e)
+        {
+            Form2 sett = new Form2();
+            sett.Show();
+            killAllChecked = sett.killAllCheckbox;
+            killAllCheckedTime = sett.killAllCheckboxTime;
         }
 
         private void update_process_button_Click(object sender, EventArgs e)
         {
-            updateElements();
+            UpdateElements();
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            resetConfig();
+            ResetConfig();
         }
 
-        private void killAllProccesses(ListView.ListViewItemCollection allItems)
+        private void KillAllProccesses(ListView.ListViewItemCollection allItems)
         {
             int N = allItems.Count;
             if (allItems.Count != 0)
@@ -196,15 +218,15 @@ namespace LeftProccessKiller
                 {
                     Process proc = Process.GetProcessesByName(allItems[0].Text)[0];
                     try { proc.Kill(); }
-                    catch (Win32Exception e) { MessageBox.Show($"Error! You don't have permission to kill {allItems[0].Text}!", "Error!", MessageBoxButtons.OK); }
+                    catch (Win32Exception) { if (showError) { MessageBox.Show($"Error! You don't have permission to kill {allItems[0].Text}!", "Error!", MessageBoxButtons.OK); } }
                     listview_process.Items.RemoveAt(0);
                     if (showAddInfo) { MessageBox.Show($"Proccess with name {allItems[0].Text} removed", "Info!", MessageBoxButtons.OK); }
                 }
             }
-            else { noActiveProccess(); }
+            else { NoActiveProccess(); }
         }
 
-        private void noActiveProccess()
+        private void NoActiveProccess()
         {
             MessageBox.Show($"Error! No active processes!", "Error!", MessageBoxButtons.OK);
         }
